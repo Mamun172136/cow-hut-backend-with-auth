@@ -1,16 +1,16 @@
-import mongoose from "mongoose";
-import app from "./app";
-import config from "./config";
+import mongoose from 'mongoose'
+import app from './app'
+import config from './config'
 async function main() {
   try {
-    await mongoose.connect(config.database as string);
+    await mongoose.connect(config.database as string)
 
-    console.log("database is connected successfully");
+    console.log('database is connected successfully')
     app.listen(config.port, () => {
-      console.log(`Example app listening on port ${config.port}`);
-    });
+      console.log(`Example app listening on port ${config.port}`)
+    })
   } catch (error) {
-    console.log(" connect holo na ", error);
+    console.log(' connect holo na ', error)
   }
 }
-main();
+main()
