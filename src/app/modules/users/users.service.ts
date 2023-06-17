@@ -16,8 +16,16 @@ const getAllUsers = async (): Promise<IUser[] | null> => {
   //   }
   return data
 }
+const getSingleUser = async (id: string): Promise<IUser | null> => {
+  const data = await User.findById({ id })
+  //   if (!createdUser) {
+  //     throw new ApiError(400, 'failed to created user bhaiiiii')
+  //   }
+  return data
+}
 
 export const UserService = {
   createUser,
   getAllUsers,
+  getSingleUser,
 }

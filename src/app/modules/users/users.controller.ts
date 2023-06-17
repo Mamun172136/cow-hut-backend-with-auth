@@ -29,7 +29,26 @@ const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
     next(error)
   }
 }
+const getSingleUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id
+    const result = await UserService.getSingleUser(id)
+
+    res.status(200).json({
+      success: true,
+      message: ' user retrieved successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 export const UserController = {
   createUser,
   getAllUsers,
+  getSingleUser,
 }
