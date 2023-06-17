@@ -1,5 +1,6 @@
 import { Model, Schema, model } from 'mongoose'
 import { IUser } from './users.interface'
+import { userRole } from './users.constant'
 
 // Create a new Model type that knows about IUserMethods...
 type UserModel = Model<IUser, object>
@@ -8,12 +9,30 @@ type UserModel = Model<IUser, object>
 const userSchema = new Schema<IUser>(
   {
     phoneNumber: { type: String, required: true },
-    role: { type: String, required: true },
+    role: { type: String, required: true, enum: userRole },
     password: { type: String, required: true },
-    name: { type: String, required: true },
+    name: {
+      type: {
+        firstName: {
+          type: String,
+          required: true,
+        },
+        lastName: {
+          type: String,
+          required: true,
+        },
+      },
+      required: true,
+    },
+    address: { type: String },
+    budget: { type: String },
+    income: { type: String },
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
   }
 )
 

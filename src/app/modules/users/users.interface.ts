@@ -1,7 +1,6 @@
 export type UserName = {
   firstName: string
-  lastName: string
-  middleName: string
+  lastName?: string
 }
 
 export type Irole = 'Seller' | 'Buyer'
@@ -11,7 +10,7 @@ export type IUser = {
   role: Irole
   password: string
   name: UserName
-  address: string
-  budget: number
-  income: number
+  address?: string
+  budget?: number
+  income?: number
 }
