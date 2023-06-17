@@ -1,6 +1,6 @@
 export type UserName = {
   firstName: string
-  lastName?: string
+  lastName: string
 }
 
 export type Irole = 'Seller' | 'Buyer'

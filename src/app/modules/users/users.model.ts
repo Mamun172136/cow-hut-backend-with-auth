@@ -25,8 +25,8 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
     address: { type: String },
-    budget: { type: String },
-    income: { type: String },
+    budget: { type: Number },
+    income: { type: Number },
   },
   {
     timestamps: true,

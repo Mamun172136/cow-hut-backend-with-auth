@@ -5,7 +5,7 @@
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint:fix": "eslint . --fix",
-    "prettier:fix": "prettier --write",
+    "prettier:fix": "prettier --write .",
     "lint-prettier": "yarn lint:check && yarn prettier:check",
     "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",

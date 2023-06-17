@@ -54,7 +54,8 @@ dist
 node_modules
 .env
 
-## "lint:fix": "eslint --fix"
+##  "lint:fix": "eslint . --fix",
+    "prettier:fix": "prettier --write .",
 
 10. prettier setup
 
