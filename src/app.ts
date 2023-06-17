@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/api/v1/users/', UserRoutes)
+app.use('/api/v1/', UserRoutes)
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
 })
