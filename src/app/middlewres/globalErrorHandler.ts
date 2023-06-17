@@ -2,6 +2,7 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
 import { IGenericErrorMessage } from '../../interfaces/error'
 import handleValidationError from '../../errors/handleValidationerror'
+import ApiError from '../../errors/ApiError'
 
 //import ApiError from '../../errors/ApiError';
 
@@ -27,6 +28,27 @@ const globalErrorHandler: ErrorRequestHandler = (
     statusCode = simplifiedError.statusCode
     message = simplifiedError.message
     errorMessages = simplifiedError.errorMessages
+  } else if (error instanceof ApiError) {
+    statusCode = error?.statusCode
+    message = error.message
+    errorMessages = error?.message
+      ? [
+          {
+            path: '',
+            message: error?.message,
+          },
+        ]
+      : []
+  } else if (error instanceof Error) {
+    message = error?.message
+    errorMessages = error?.message
+      ? [
+          {
+            path: '',
+            message: error?.message,
+          },
+        ]
+      : []
   }
 
   res.status(statusCode).json({
