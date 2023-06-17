@@ -2,8 +2,13 @@ import mongoose from 'mongoose'
 import app from './app'
 import config from './config'
 import { Server } from 'http'
+
+process.on('uncaughtException', error => {
+  console.log('uncaught error', error)
+  process.exit(1)
+})
+let server: Server
 async function main() {
-  let server: Server
   try {
     await mongoose.connect(config.database as string)
 
@@ -26,3 +31,9 @@ async function main() {
   })
 }
 main()
+
+process.on('SIGTERM', () => {
+  if (server) {
+    server.close()
+  }
+})
