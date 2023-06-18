@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post('/cows', CowController.createCow)
 // router.get('/users', UserController.getAllUsers)
-// router.get('/users/:id', UserController.getSingleUser)
+router.get('/cows/:id', CowController.getSingleCow)
 // router.patch('/users/:id', UserController.updateUser)
 // router.patch('/users/:id', UserController.deleteUser)
 

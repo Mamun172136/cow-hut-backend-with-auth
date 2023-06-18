@@ -16,13 +16,13 @@ const createCow = async (user: ICow): Promise<ICow | null> => {
 //   //   }
 //   return data
 // }
-// const getSingleUser = async (id: string): Promise<IUser | null> => {
-//   const data = await User.findById(id)
-//   //   if (!createdUser) {
-//   //     throw new ApiError(400, 'failed to created user bhaiiiii')
-//   //   }
-//   return data
-// }
+const getSingleCow = async (id: string): Promise<ICow | null> => {
+  const data = await Cow.findById(id)
+  //   if (!createdUser) {
+  //     throw new ApiError(400, 'failed to created user bhaiiiii')
+  //   }
+  return data
+}
 // const updateUser = async (
 //   id: string,
 //   payload: Partial<IUser>
@@ -45,7 +45,7 @@ const createCow = async (user: ICow): Promise<ICow | null> => {
 export const CowService = {
   createCow,
   //   getAllCows,
-  //   getSingleCow,
+  getSingleCow,
   //   updateCow,
   //   deleteCow,
 }
