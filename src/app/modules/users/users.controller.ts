@@ -74,6 +74,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
       data: result,
     })
   } catch (error) {
+    // res.status(90).json({ biswas: error })
     next(error)
   }
 }

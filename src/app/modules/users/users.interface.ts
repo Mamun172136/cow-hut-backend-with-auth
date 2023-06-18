@@ -3,7 +3,7 @@ export type UserName = {
   lastName: string
 }
 
-export type Irole = 'Seller' | 'Buyer'
+export type Irole = 'seller' | 'buyer'
 
 export type IUser = {
   phoneNumber: string
