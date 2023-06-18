@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { CowService } from './cows.service'
+import pick from '../../../shared/pick'
+import { paginationFields } from '../../../constant/pagination'
 
 const createCow = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -16,19 +18,29 @@ const createCow = async (req: Request, res: Response, next: NextFunction) => {
     next(error)
   }
 }
-// const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const result = await UserService.getAllUsers()
 
-//     res.status(200).json({
-//       success: true,
-//       message: ' users retrieved successfully',
-//       data: result,
-//     })
-//   } catch (error) {
-//     next(error)
-//   }
-// }
+const getAllCows = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // const paginationOptions = {
+    //   page: Number(req.query.page),
+    //   limit: Number(req.query.limit),
+    //   sortBy: req.query.sortBy,
+    //   sortOrder: req.query.sortOrder,
+    // }
+    const filters = pick(req.query, ['searchTerm'])
+    const paginationOptions = pick(req.query, paginationFields)
+    const result = await CowService.getAllCows(filters, paginationOptions)
+
+    res.status(200).json({
+      success: true,
+      message: ' cows retrieved successfully',
+      meta: result?.meta || null,
+      data: result?.data || null,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 const getSingleCow = async (
   req: Request,
   res: Response,
@@ -62,6 +74,21 @@ const updateCow = async (req: Request, res: Response, next: NextFunction) => {
     next(error)
   }
 }
+const deleteCow = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id
+
+    const result = await CowService.deleteCow(id)
+
+    res.status(200).json({
+      success: true,
+      message: ' cow deleted successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 // const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 //   try {
 //     const id = req.params.id
@@ -79,8 +106,8 @@ const updateCow = async (req: Request, res: Response, next: NextFunction) => {
 // }
 export const CowController = {
   createCow,
-  //   getAllCows,
+  getAllCows,
   getSingleCow,
   updateCow,
-  //   deleteCow,
+  deleteCow,
 }

@@ -5,8 +5,10 @@ const router = express.Router()
 
 router.post('/cows', CowController.createCow)
 // router.get('/users', UserController.getAllUsers)
+router.get('/cows/', CowController.getAllCows)
 router.get('/cows/:id', CowController.getSingleCow)
+
 router.patch('/cows/:id', CowController.updateCow)
-// router.patch('/users/:id', UserController.deleteUser)
+router.delete('/cows/:id', CowController.deleteCow)
 
 export const CowRoutes = router
