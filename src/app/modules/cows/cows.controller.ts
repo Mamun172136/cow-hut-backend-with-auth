@@ -47,21 +47,21 @@ const getSingleCow = async (
     next(error)
   }
 }
-// const updateUser = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const id = req.params.id
-//     const updatedData = req.body
-//     const result = await UserService.updateUser(id, updatedData)
+const updateCow = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id
+    const updatedData = req.body
+    const result = await CowService.updateCow(id, updatedData)
 
-//     res.status(200).json({
-//       success: true,
-//       message: ' user updated successfully',
-//       data: result,
-//     })
-//   } catch (error) {
-//     next(error)
-//   }
-// }
+    res.status(200).json({
+      success: true,
+      message: ' cow updated successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 // const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 //   try {
 //     const id = req.params.id
@@ -81,6 +81,6 @@ export const CowController = {
   createCow,
   //   getAllCows,
   getSingleCow,
-  //   updateCow,
+  updateCow,
   //   deleteCow,
 }

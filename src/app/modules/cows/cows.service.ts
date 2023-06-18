@@ -23,16 +23,16 @@ const getSingleCow = async (id: string): Promise<ICow | null> => {
   //   }
   return data
 }
-// const updateUser = async (
-//   id: string,
-//   payload: Partial<IUser>
-// ): Promise<IUser | null> => {
-//   const data = await User.findOneAndUpdate({ _id: id }, payload, { new: true })
-//   //   if (!createdUser) {
-//   //     throw new ApiError(400, 'failed to created user bhaiiiii')
-//   //   }
-//   return data
-// }
+const updateCow = async (
+  id: string,
+  payload: Partial<ICow>
+): Promise<ICow | null> => {
+  const data = await Cow.findOneAndUpdate({ _id: id }, payload, { new: true })
+  //   if (!createdUser) {
+  //     throw new ApiError(400, 'failed to created user bhaiiiii')
+  //   }
+  return data
+}
 
 // const deleteUser = async (id: string): Promise<IUser | null> => {
 //   const data = await User.findByIdAndDelete(id)
@@ -46,6 +46,6 @@ export const CowService = {
   createCow,
   //   getAllCows,
   getSingleCow,
-  //   updateCow,
+  updateCow,
   //   deleteCow,
 }
