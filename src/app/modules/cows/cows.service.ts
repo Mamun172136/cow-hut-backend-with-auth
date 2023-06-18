@@ -29,9 +29,13 @@ const getAllCows = async (
   if (sortBy && sortOrder) {
     sortCondition[sortBy] = sortOrder
   }
-  const searchAbleField = ['location']
-  const { searchTerm } = filters
+
+  const searchAbleField = ['location', 'breed', 'category']
+
+  const { searchTerm, maxPrice, minPrice, ...filtersData } = filters
+
   const andConditions = []
+
   if (searchTerm) {
     andConditions.push({
       $or: searchAbleField.map(field => ({
@@ -43,11 +47,34 @@ const getAllCows = async (
     })
   }
 
-  const result = await Cow.find().sort().skip(skip).limit(limit)
+  if (minPrice || maxPrice) {
+    const priceCondition: { [key: string]: number } = {}
+    if (minPrice) {
+      priceCondition.$gte = minPrice
+    }
+    if (maxPrice) {
+      priceCondition.$lte = maxPrice
+    }
+    andConditions.push({ price: priceCondition })
+  }
+
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    })
+  }
+
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {}
+
+  const result = await Cow.find(whereConditions)
+    .sort(sortCondition)
+    .skip(skip)
+    .limit(limit)
   const total = await Cow.countDocuments()
-  //   if (!createdUser) {
-  //     throw new ApiError(400, 'failed to created user bhaiiiii')
-  //   }
+
   return {
     meta: {
       page,
