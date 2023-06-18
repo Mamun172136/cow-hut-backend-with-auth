@@ -47,8 +47,40 @@ const getSingleUser = async (
     next(error)
   }
 }
+const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id
+    const updatedData = req.body
+    const result = await UserService.updateUser(id, updatedData)
+
+    res.status(200).json({
+      success: true,
+      message: ' user updated successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id
+
+    const result = await UserService.deleteUser(id)
+
+    res.status(200).json({
+      success: true,
+      message: ' user updated successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 export const UserController = {
   createUser,
   getAllUsers,
   getSingleUser,
+  updateUser,
+  deleteUser,
 }

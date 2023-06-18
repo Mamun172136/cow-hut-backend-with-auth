@@ -17,7 +17,25 @@ const getAllUsers = async (): Promise<IUser[] | null> => {
   return data
 }
 const getSingleUser = async (id: string): Promise<IUser | null> => {
-  const data = await User.findById({ id })
+  const data = await User.findById(id)
+  //   if (!createdUser) {
+  //     throw new ApiError(400, 'failed to created user bhaiiiii')
+  //   }
+  return data
+}
+const updateUser = async (
+  id: string,
+  payload: Partial<IUser>
+): Promise<IUser | null> => {
+  const data = await User.findOneAndUpdate({ _id: id }, payload, { new: true })
+  //   if (!createdUser) {
+  //     throw new ApiError(400, 'failed to created user bhaiiiii')
+  //   }
+  return data
+}
+
+const deleteUser = async (id: string): Promise<IUser | null> => {
+  const data = await User.findByIdAndDelete(id)
   //   if (!createdUser) {
   //     throw new ApiError(400, 'failed to created user bhaiiiii')
   //   }
@@ -28,4 +46,6 @@ export const UserService = {
   createUser,
   getAllUsers,
   getSingleUser,
+  updateUser,
+  deleteUser,
 }
