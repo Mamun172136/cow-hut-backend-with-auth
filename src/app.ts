@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/', UserRoutes)
 app.use('/api/v1/', CowRoutes)
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!')
+  res.send('Hello World! from digital cow hut')
 })
 
 //global error handler

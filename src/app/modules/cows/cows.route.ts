@@ -7,6 +7,7 @@ router.post('/cows', CowController.createCow)
 // router.get('/users', UserController.getAllUsers)
 router.get('/cows/', CowController.getAllCows)
 router.get('/cows/:id', CowController.getSingleCow)
+router.get('/cow/change/:id', CowController.updateCowDocument)
 
 router.patch('/cows/:id', CowController.updateCow)
 router.delete('/cows/:id', CowController.deleteCow)

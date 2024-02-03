@@ -109,10 +109,30 @@ const deleteCow = async (req: Request, res: Response, next: NextFunction) => {
 //     next(error)
 //   }
 // }
+
+const updateCowDocument = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id
+    const result = await CowService.updateCowDocument(id)
+
+    res.status(200).json({
+      success: true,
+      message: ' cow retrieved successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 export const CowController = {
   createCow,
   getAllCows,
   getSingleCow,
   updateCow,
   deleteCow,
+  updateCowDocument,
 }

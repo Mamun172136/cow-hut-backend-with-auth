@@ -79,10 +79,30 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     next(error)
   }
 }
+
+const updateDocument = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id
+    const result = await UserService.updateDocument(id)
+
+    res.status(200).json({
+      success: true,
+      message: ' user retrieved successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 export const UserController = {
   createUser,
   getAllUsers,
   getSingleUser,
   updateUser,
   deleteUser,
+  updateDocument,
 }

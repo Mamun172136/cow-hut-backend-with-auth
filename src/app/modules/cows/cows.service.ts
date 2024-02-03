@@ -1,4 +1,4 @@
-import { SortOrder } from 'mongoose'
+import { SortOrder, Types } from 'mongoose'
 import ApiError from '../../../errors/ApiError'
 import { IGenericResponse } from '../../../interfaces/common'
 import { IpaginationOptions } from '../../../interfaces/pagination'
@@ -111,10 +111,44 @@ const deleteCow = async (id: string): Promise<ICow | null> => {
 //   return data
 // }
 
+const updateCowDocument = async (id: string): Promise<ICow> => {
+  const existingUser = await Cow.findById(id)
+
+  if (!existingUser) {
+    throw new ApiError(400, 'cow not found')
+  }
+
+  // Copy the fields from the existing document
+  const { name, age, price, location, breed, weight, label, category, seller } =
+    existingUser
+
+  // Create a new document with the desired _id
+  const newUser = new Cow({
+    _id: new Types.ObjectId('6177a5b87d32123f08d2f5d4'),
+    name,
+    age,
+    price,
+    location,
+    breed,
+    weight,
+    label,
+    category,
+    seller,
+  })
+
+  // Save the new document
+  await newUser.save()
+
+  // Remove the old document
+  await Cow.deleteOne({ _id: existingUser._id })
+
+  return newUser
+}
 export const CowService = {
   createCow,
   getAllCows,
   getSingleCow,
   updateCow,
   deleteCow,
+  updateCowDocument,
 }
